@@ -9,13 +9,13 @@ import * as dat from 'dat.gui'
 
 // Loader
 const textureLoader = new THREE.TextureLoader();
-const myTexture = textureLoader.load('/textures/daran.jpg')
+const myTexture = textureLoader.load('/textures/texture1.jpeg')
 myTexture.wrapS = THREE.RepeatWrapping;
 myTexture.wrapT = THREE.RepeatWrapping;
-myTexture.repeat.set(4, 4);
+myTexture.repeat.set(10, 10);
 
 console.log(myTexture);
-const bodyMaterial = new THREE.MeshPhongMaterial({ map: myTexture });
+const bodyMaterial = new THREE.MeshStandardMaterial({ map: myTexture });
 // const bodyMaterial = new THREE.MeshPhysicalMaterial({
 //     color: 0xff0000, metalness: 0.6, roughness: 0.4, clearcoat: 0.05, clearcoatRoughness: 0.05
 // });
@@ -27,13 +27,14 @@ dracoLoader.setDecoderPath('/draco/gltf/');
 loader.setDRACOLoader(dracoLoader);
 
 let obj;
-loader.load('lure_binsky.glb', function (gltf) {
+loader.load('moi_mem2.glb', function (gltf) {
     obj = gltf;
     console.log(obj);
-    const myModel = gltf.scene;
+    const myModel = gltf.scene.children[0];
 
-    myModel.getObjectByName('mesh_0').material = bodyMaterial
-    // myModel.getObjectByName('shoe_1').material = bodyMaterial
+    // gltf.scene.children[0].children[0].material = bodyMaterial
+    myModel.getObjectByName('Cube004').material = bodyMaterial
+    // myModel.getObjectByName('Cube004_1').material = bodyMaterial
     // myModel.getObjectByName('shoe_2').material = bodyMaterial
     // myModel.getObjectByName('shoe_3').material = bodyMaterial
     // myModel.getObjectByName('shoe_4').material = bodyMaterial
